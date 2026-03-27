@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="shop.ShoppingCartController"
+      spacing="10"
+      prefWidth="700"
+      prefHeight="500">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label fx:id="languageLabel" text="%select.language"/>
+    <ComboBox fx:id="languageComboBox"/>
+    <Button fx:id="confirmLanguageButton" text="%confirm.language" onAction="#handleLanguageChange"/>
+
+    <Separator/>
+
+    <Label fx:id="itemCountLabel" text="%enter.item.count"/>
+    <TextField fx:id="itemCountField" promptText="%item.count.prompt"/>
+    <Button fx:id="generateItemsButton" text="%enter.items" onAction="#handleGenerateItems"/>
+
+    <VBox fx:id="itemsContainer" spacing="8"/>
+
+    <Button fx:id="calculateButton" text="%calculate.total" onAction="#handleCalculate"/>
+
+    <Label fx:id="totalLabel" text="%total.cost"/>
+    <Label fx:id="resultLabel" text="0.00"/>
+</VBox>

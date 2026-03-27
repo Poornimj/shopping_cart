@@ -2,72 +2,69 @@ package shop;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CartCalculatorTest {
 
-    CartCalculator calculator = new CartCalculator();
+    private final CartCalculator calculator = new CartCalculator();
 
     @Test
     void testCalculateItemTotal() {
-        double result = calculator.calculateItemTotal(10.0, 3);
-        assertEquals(30.0, result, 0.001);
+        assertEquals(30.0, calculator.calculateItemTotal(10.0, 3), 0.001);
+    }
+
+    @Test
+    void testCalculateItemTotalWithZeroQuantity() {
+        assertEquals(0.0, calculator.calculateItemTotal(10.0, 0), 0.001);
+    }
+
+    @Test
+    void testCalculateItemTotalWithZeroPrice() {
+        assertEquals(0.0, calculator.calculateItemTotal(0.0, 5), 0.001);
+    }
+
+    @Test
+    void testCalculateItemTotalWithDecimalPrice() {
+        assertEquals(25.0, calculator.calculateItemTotal(12.5, 2), 0.001);
     }
 
     @Test
     void testCalculateCartTotal() {
-        double[] prices = {10.0, 5.5, 20.0};
-        int[] quantities = {2, 4, 1};
-
-        double result = calculator.calculateCartTotal(prices, quantities);
-
-        assertEquals(62.0, result, 0.001);
+        double total = calculator.calculateCartTotal(
+                List.of(10.0, 5.5, 20.0),
+                List.of(2, 4, 1)
+        );
+        assertEquals(62.0, total, 0.001);
     }
 
     @Test
     void testCalculateCartTotalEmpty() {
-        double[] prices = {};
-        int[] quantities = {};
-
-        double result = calculator.calculateCartTotal(prices, quantities);
-
-        assertEquals(0.0, result, 0.001);
-
-    }@Test
-    void testZeroQuantity() {
-        double result = calculator.calculateItemTotal(10.0, 0);
-        assertEquals(0.0, result, 0.001);
-    }
-
-    @Test
-    void testZeroPrice() {
-        double result = calculator.calculateItemTotal(0.0, 5);
-        assertEquals(0.0, result, 0.001);
+        double total = calculator.calculateCartTotal(List.of(), List.of());
+        assertEquals(0.0, total, 0.001);
     }
 
     @Test
     void testSingleItemCart() {
-        double[] prices = {15.0};
-        int[] quantities = {2};
-
-        double result = calculator.calculateCartTotal(prices, quantities);
-
-        assertEquals(30.0, result, 0.001);
+        double total = calculator.calculateCartTotal(List.of(15.0), List.of(2));
+        assertEquals(30.0, total, 0.001);
+    }
+    @Test
+    void testLargeCart() {
+        double total = calculator.calculateCartTotal(
+                List.of(100.0, 200.0, 300.0),
+                List.of(1, 2, 3)
+        );
+        assertEquals(1400.0, total, 0.001);
     }
 
     @Test
-    void testLargeValues() {
-        double[] prices = {100.0, 200.0};
-        int[] quantities = {10, 5};
-
-        double result = calculator.calculateCartTotal(prices, quantities);
-
-        assertEquals(1000.0 + 1000.0, result, 0.001);
+    void testMixedValues() {
+        double total = calculator.calculateCartTotal(
+                List.of(0.0, 10.5, 2.5),
+                List.of(5, 2, 4)
+        );
+        assertEquals(0 + 21 + 10, total, 0.001);
     }
-    @Test
-    void testDecimalPrice() {
-        double result = calculator.calculateItemTotal(12.5, 2);
-        assertEquals(25.0, result, 0.001);
-    }
-
 }

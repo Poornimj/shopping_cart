@@ -1,22 +1,21 @@
-# Java Shopping Cart Application
+# Shopping Cart Application
+
+## Author
+Poornima Jayamanna
+
+## Description
+This is a JavaFX-based shopping cart application with localization support.
 
 ## Features
-- Console-based shopping cart
-- Localization: English, Finnish, Swedish, Japanese
-- UTF-8 encoding
+- Multi-language support (English, Finnish, Swedish, Japanese, Arabic)
+- Dynamic UI updates
+- Cart total calculation
 - Unit testing with JUnit 5
 - Code coverage with JaCoCo
-- CI/CD with Jenkins
-- Dockerized application
+- Docker support
+- Jenkins CI pipeline
 
-## Run locally
-mvn clean package
-java -jar target/shopping-cart-app-1.0-SNAPSHOT.jar
+## How to Run
 
-## Run tests
-mvn test
-mvn jacoco:report
-
-## Docker
-docker build -t poornimj/shopping-cart-app:latest .
-docker run -it poornimj/shopping-cart-app:latest
+```bash
+mvn clean javafx:run
